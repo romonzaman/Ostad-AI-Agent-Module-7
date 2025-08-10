@@ -9,4 +9,4 @@
    export OPENAI_API_KEY="sk-..."
 
 4. Run:
-   uvicorn app.main:app --reload --port 8000
+   uvicorn main:app --reload --port 8000
