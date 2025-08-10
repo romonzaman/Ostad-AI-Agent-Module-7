@@ -2,10 +2,17 @@
 import base64
 from openai import OpenAI
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
-client = OpenAI()
+load_dotenv()
 
-def generate_image_from_prompt(prompt: str, out_path: str, width: int = 512, height: int = 512):
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+client = OpenAI(api_key=OPENAI_API_KEY)
+
+def generate_image_from_prompt(prompt: str, out_path: str, width: int = 1024, height: int = 1024):
     """
     Uses OpenAI image generation API and writes PNG bytes to out_path.
     """

@@ -1,12 +1,12 @@
-# Multimodal API (FastAPI)
-
-Provides three endpoints:
-- `POST /stt/` : upload audio (`multipart/form-data`) -> returns JSON transcription
-- `POST /tts/` : JSON `{ "text": "..." }` -> returns `audio/wav`
-- `POST /generate-image/` : JSON `{ "prompt": "..." }` -> returns `image/png`
-
-## Setup (example)
-1. Create and activate a virtualenv
-   ```bash
-   python -m venv venv
+1. Create venv:
+   python3 -m venv venv
    source venv/bin/activate
+
+2. Install:
+   pip install -r requirements.txt
+
+3. Set .env:
+   export OPENAI_API_KEY="sk-..."
+
+4. Run:
+   uvicorn app.main:app --reload --port 8000

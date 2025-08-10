@@ -4,7 +4,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from pathlib import Path
 import uuid
-from app.services.image_service import generate_image_from_prompt
+from services.image_service import generate_image_from_prompt
 
 router = APIRouter()
 TMP_DIR = Path("tmp")

@@ -3,7 +3,7 @@ from fastapi import APIRouter, UploadFile, File, HTTPException
 from fastapi.responses import JSONResponse
 from pathlib import Path
 import uuid
-from app.services.stt_service import transcribe_file
+from services.stt_service import transcribe_file
 
 router = APIRouter()
 TMP_DIR = Path("tmp")

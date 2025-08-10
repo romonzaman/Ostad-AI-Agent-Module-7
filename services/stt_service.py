@@ -2,9 +2,13 @@
 import os
 from pathlib import Path
 from openai import OpenAI
+from dotenv import load_dotenv
 
-# expect OPENAI_API_KEY in env
-client = OpenAI()
+load_dotenv()
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=OPENAI_API_KEY)
+
 
 def transcribe_file(filepath: str) -> str:
     """
@@ -20,11 +24,9 @@ def transcribe_file(filepath: str) -> str:
             file=audio_file
         )
     # resp is expected to have 'text' field
-    text = getattr(resp, "text", None) or resp.get("text") if isinstance(resp, dict) else None
-    if text is None:
-        # fallback: try resp['data'][0]['text']
-        try:
-            text = resp["data"][0]["text"]
-        except Exception:
-            raise RuntimeError("Unexpected transcription response format")
+    text = getattr(resp, "text", None)
+    if not text:
+        # fallback: try str() or raise error
+        raise RuntimeError("Unexpected transcription response format: no text found")
+
     return text.strip()

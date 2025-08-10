@@ -1,7 +1,18 @@
 # app/main.py
+from dotenv import load_dotenv
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import stt, tts, image_gen
+from routes import stt, tts, image_gen
+
+load_dotenv()
+
+# Get API key
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+if not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY is not set in .env")
 
 app = FastAPI(title="Multimodal API (OpenAI)")
 

@@ -4,7 +4,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from pathlib import Path
 import uuid
-from app.services.tts_service import synthesize_tts
+from services.tts_service import synthesize_tts
 
 router = APIRouter()
 TMP_DIR = Path("tmp")

@@ -1,8 +1,12 @@
 # app/services/tts_service.py
 import os
 from openai import OpenAI
+from dotenv import load_dotenv
 
-client = OpenAI()
+load_dotenv()
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 def synthesize_tts(text: str, out_path: str, voice: str | None = None, fmt: str | None = "mp3"):
     """
@@ -18,7 +22,7 @@ def synthesize_tts(text: str, out_path: str, voice: str | None = None, fmt: str 
         model="gpt-4o-mini-tts",   # change if your account/model differs
         voice=voice or "alloy",   # optional
         input=text,
-        format=fmt
+        response_format=fmt
     )
     # response may be binary, or contain a url/base64 depending on SDK.
     # Here assume `resp` contains bytes in resp.read() or .content
